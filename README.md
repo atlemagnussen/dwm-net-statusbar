@@ -12,13 +12,7 @@ dotnet publish -c Release -r linux-x64 --self-contained false
 ```
 
 ```sh
-sudo mkdir /usr/local/bin/dwm-net-status
-sudo cp dwm-net-statusbar /usr/local/bin/dwm-net-status
-sudo cp dwm-net-statusbar.deps.json /usr/local/bin/dwm-net-status
-sudo cp dwm-net-statusbar.dll /usr/local/bin/dwm-net-status
-sudo cp dwm-net-statusbar.pdb /usr/local/bin/dwm-net-status
-sudo cp dwm-net-statusbar.runtimeconfig.dev.json /usr/local/bin/dwm-net-status
-sudo cp dwm-net-statusbar.runtimeconfig.json /usr/local/bin/dwm-net-status
-sudo cp libhostfxr.so /usr/local/bin/dwm-net-status
-sudo cp libhostpolicy.so /usr/local/bin/dwm-net-status
+sudo mkdir /usr/local/bin/dwm-status
+sudo cp bin/Release/netcoreapp2.2/linux-x64/* /usr/local/bin/dwm-status
+
 ```

@@ -15,13 +15,29 @@ namespace dwm_net_statusbar
                 IPEndPoint endPoint = socket.LocalEndPoint as IPEndPoint;
                 localIP = endPoint.Address.ToString();
             }
-            IP();
             return localIP;
         }
 
-        public static string IP() {
-            var networkInterfaces = NetworkInterface.GetAllNetworkInterfaces();
-            return null;
+        public static string InterfaceStatus() {
+            var nics = NetworkInterface.GetAllNetworkInterfaces();
+            if (nics == null || nics.Length == 0) {
+                return "no network";
+            }
+            var retval = string.Empty;
+            foreach(var nic in nics) {
+                if (nic.NetworkInterfaceType == NetworkInterfaceType.Loopback)
+                    continue;
+                if (nic.OperationalStatus == OperationalStatus.Up) {
+                    foreach (UnicastIPAddressInformation ip in nic.GetIPProperties().UnicastAddresses)
+                    {
+                        if (ip.Address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
+                            retval += ip.Address.ToString();
+                    }
+                } else {
+                    retval += $"{nic.Name} is {nic.OperationalStatus.ToString()}";
+                }
+            }
+            return retval;
         }
     }
 }

@@ -13,14 +13,14 @@ namespace dwm_net_statusbar
                 try {
                     var battery = Battery.Status();
                     var time = DateTime.Now;
-                    var ipLan = Network.Status();
-                    
+                    var ipLan = Network.InterfaceStatus();
+                    Console.WriteLine(ipLan);
                     var status = $"{ipLan} {battery} {time}";
                     ShellHelper.Bash($"xsetroot -name \"{status}\"");
                 }
                 catch(Exception e) {
                     Console.WriteLine(e.Message);
-                    run = false;
+                    ShellHelper.Bash($"xsetroot -name \"error\"");
                 }
                 Thread.Sleep(10000);
             }
