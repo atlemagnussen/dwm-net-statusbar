@@ -15,7 +15,9 @@ namespace dwm_net_statusbar
                     var time = DateTime.Now;
                     var ipLan = Network.InterfaceStatus();
                     Console.WriteLine(ipLan);
-                    var status = $"{ipLan} {battery} {time}";
+                    var icon = "\ud83d\udd0b";
+                    var status = $"{ipLan} {icon}{battery} {time}";
+                    Console.WriteLine(status);
                     ShellHelper.Bash($"xsetroot -name \"{status}\"");
                 }
                 catch(Exception e) {
