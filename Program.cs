@@ -12,11 +12,13 @@ namespace dwm_net_statusbar
             while(run) {
                 try {
                     var battery = Battery.Status();
+                    var temp = Temp.State();
+                    var celsius = '\u2103';
                     var time = DateTime.Now;
                     var ipLan = Network.InterfaceStatus();
                     Console.WriteLine(ipLan);
                     var icon = "\ud83d\udd0b";
-                    var status = $"{ipLan} {icon}{battery} {time}";
+                    var status = $"{ipLan} {icon}{battery} {temp}{celsius} {time}";
                     Console.WriteLine(status);
                     ShellHelper.Bash($"xsetroot -name \"{status}\"");
                 }
