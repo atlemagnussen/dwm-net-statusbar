@@ -14,11 +14,12 @@ namespace dwm_net_statusbar
                     var battery = Battery.Status();
                     var temp = Temp.State();
                     var celsius = '\u2103';
-                    var time = DateTime.Now;
+                    var time = DateTime.Now.ToString("yyyy-MM-dd") + " \x231A" + DateTime.Now.ToString("HH:mm");
                     var ipLan = Network.InterfaceStatus();
+                    var vol = Volume.State();
+                    var scr = Screen.State();
                     Console.WriteLine(ipLan);
-                    var icon = "\ud83d\udd0b";
-                    var status = $"{ipLan} {icon}{battery} {temp}{celsius} {time}";
+                    var status = $"\x25BD{ipLan} \x26A1{battery} {temp}{celsius} \x25C0{vol} \x239A{scr}% {time}";
                     Console.WriteLine(status);
                     ShellHelper.Bash($"xsetroot -name \"{status}\"");
                 }
